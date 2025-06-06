@@ -63,10 +63,6 @@ class App(CTk):
             justify="right",
         )
         self.equation_entry.pack(fill="both", padx=8, pady=16)
-        
-        # Bind these events after creating your entry widget
-        self.equation_entry.bind("<KeyRelease>", self.force_cursor_end)
-        self.equation_entry.bind("<ButtonRelease-1>", self.force_cursor_end)
 
     def force_cursor_end(self, event=None):
         self.equation_entry.icursor("end")
@@ -165,7 +161,7 @@ class App(CTk):
         
         if len(equations) > 0:    
             # Prevent the first element from being an operator (except '-')
-            if self.check_types(equations[0]) == "operator" and '-' not in equations[0]:
+            if self.check_types(equations[0]) == "operator" and  equations[0] not in ['-', '(']:
                 equations.pop(0)
 
             # Sanitize consecutive operators
